@@ -1,13 +1,6 @@
-# install Python 3.8.5 and pip 20.3
-apt update
-apt install -y python3.8 python3-pip
-
-# install torch with CUDA support. See https://pytorch.org/get-started/locally/ for more instructions if this fails.
-pip3 install torch --extra-index-url https://download.pytorch.org/whl/cu113
-
 # check if torch supports GPU; this must output "True". You need CUDA 11. installed for this. You might be able to use
 # a different version, but this is what I tested.
-python3 -c "import torch; print(torch.cuda.is_available())"
+python -c "import torch; print(torch.cuda.is_available())"
 
 # clone web ui and go into its directory
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
@@ -20,27 +13,30 @@ git clone https://github.com/CompVis/taming-transformers.git repositories/taming
 git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
 
 # install requirements of Stable Diffusion
-pip3 install transformers==4.19.2 diffusers invisible-watermark --prefer-binary
+pip install transformers==4.19.2 diffusers invisible-watermark
 
 # install k-diffusion
-pip3 install git+https://github.com/crowsonkb/k-diffusion.git --prefer-binary
+pip install git+https://github.com/crowsonkb/k-diffusion.git
 
 # (optional) install GFPGAN (face resoration)
-pip3 install git+https://github.com/TencentARC/GFPGAN.git --prefer-binary
+pip install git+https://github.com/TencentARC/GFPGAN.git
 
 # (optional) install requirements for CodeFormer (face resoration)
-pip3 install -r repositories/CodeFormer/requirements.txt --prefer-binary
+pip install -r repositories/CodeFormer/requirements.txt
 
 # install requirements of web ui
-pip3 install -r requirements.txt  --prefer-binary
+pip install -r requirements.txt
 
 # update numpy to latest version
-pip3 install -U numpy  --prefer-binary
+pip install -U numpy
+pip install markupsafe==2.0.1
+
+apt install ffmpeg libsm6 libxext6  -y
 
 # (outside of command line) put stable diffusion model into web ui directory
 # the command below must output something like: 1 File(s) 4,265,380,512 bytes
-dir model.ckpt
+curl https://www.googleapis.com/storage/v1/b/aai-blog-files/o/sd-v1-4.ckpt?alt=media > model.ckpt
 
 # (outside of command line) put the GFPGAN model into web ui directory
 # the command below must output something like: 1 File(s) 348,632,874 bytes
-dir GFPGANv1.3.pth
+wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth
