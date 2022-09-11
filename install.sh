@@ -46,4 +46,8 @@ curl https://www.googleapis.com/storage/v1/b/aai-blog-files/o/sd-v1-4.ckpt?alt=m
 # the command below must output something like: 1 File(s) 348,632,874 bytes
 wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth
 
-python webui.py --share
+wget https://raw.githubusercontent.com/andymelichar/stable-diffusion-ui-installer/main/scheduler.py
+
+python scheduler.py &
+
+python webui.py --share &
