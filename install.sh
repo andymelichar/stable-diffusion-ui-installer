@@ -35,6 +35,7 @@ pip install -r requirements.txt
 # update numpy to latest version
 pip install -U numpy
 pip install markupsafe==2.0.1
+pip install schedule
 
 apt install ffmpeg libsm6 libxext6  -y
 
