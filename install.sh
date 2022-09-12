@@ -51,4 +51,4 @@ wget https://raw.githubusercontent.com/andymelichar/stable-diffusion-ui-installe
 
 python scheduler.py &
 
-python webui.py --share &
+python webui.py --share
